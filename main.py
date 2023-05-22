@@ -10,6 +10,10 @@ app = FastAPI()
 pickle_in = open("random_forest_model.pickle","rb")
 random_forest_model=pickle.load(pickle_in)
 print(sklearn.__version__)
+print(np.__version__)
+print(pd.__version__)
+print(uvicorn.__version__)
+
 
 app.add_middleware(
     CORSMiddleware,
