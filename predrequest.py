@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 class PredictionRequest(BaseModel):
     Clear: int
@@ -7,3 +8,6 @@ class PredictionRequest(BaseModel):
     Day_of_Year: int
     Temperature: int
     Wind_Speed: float
+
+class PredictionRequestList(BaseModel):
+    data : List[PredictionRequest]

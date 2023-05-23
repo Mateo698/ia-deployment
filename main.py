@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from predrequest import PredictionRequest
+from predrequest import PredictionRequestList
 import pickle
 import numpy as np
 import pandas as pd
@@ -10,11 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 pickle_in = open("random_forest_model.pickle","rb")
 random_forest_model=pickle.load(pickle_in)
-print(sklearn.__version__)
-print(np.__version__)
-print(pd.__version__)
-print(uvicorn.__version__)
-print(fastapi.__version__)
+
 
 
 app.add_middleware(
@@ -45,6 +42,14 @@ async def predict(data:PredictionRequest):
     print(prediction.dtype)
 
     return{'prediction':prediction.tolist()}
+
+@app.post('/multiplePredict')
+async def multiplePredict(data:PredictionRequestList):
+    data = data.dict()
+    list_of_lists = [[value for value in inner_dict.values()] for inner_dict in data['data']]
+    prediction = random_forest_model.predict(list_of_lists)
+    return{'prediction':prediction.tolist()}
+
 
 
 
