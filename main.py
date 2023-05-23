@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import uvicorn
 import sklearn
+import fastapi
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 pickle_in = open("random_forest_model.pickle","rb")
@@ -13,6 +14,7 @@ print(sklearn.__version__)
 print(np.__version__)
 print(pd.__version__)
 print(uvicorn.__version__)
+print(fastapi.__version__)
 
 
 app.add_middleware(
