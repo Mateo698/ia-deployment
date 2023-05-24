@@ -53,7 +53,9 @@ async def multiplePredict(data:PredictionRequestList):
     return{'prediction':prediction.tolist()}
 
 @app.post('/predict_file')
-async def predict_file(request:Request):    
-    return await request.json()
+async def predict_file(request:Request):   
+    data = await request.json()
+    list_of_lists = [[value for value in inner_dict.values()] for inner_dict in data['data']] 
+    return{"data":list_of_lists}
 
 
