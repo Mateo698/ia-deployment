@@ -57,6 +57,6 @@ async def predict_file(request:Request):
     data = await request.json()
     list_of_lists = [[value for value in inner_dict.values()] for inner_dict in data['data']]
     lista_transformada = [[float(obj['Clear']), float(obj['Distance'])] for obj in list_of_lists]
-    return{"data":list_of_lists}
+    return{"data":lista_transformada}
 
 
