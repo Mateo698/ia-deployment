@@ -55,7 +55,11 @@ async def multiplePredict(data:PredictionRequestList):
 @app.post('/predict_file')
 async def predict_file(request:Request):   
     data = await request.json()
-    list_of_lists = [[value for value in inner_dict.values()] for inner_dict in data['data']] 
-    return{"data":list_of_lists}
+    list_of_lists = [[value for value in inner_dict.values()] for inner_dict in data['data']]
+    print(list_of_lists) 
+    dum_data = [{"Clear:": 0, "Distance": 0, "City_Freq": 0, "State_Freq": 0, "Day_of_Year": 0, "Temperature": 0, "Wind_Speed": 0, "prediction": "0"},
+                {"Clear:": 0, "Distance": 0, "City_Freq": 0, "State_Freq": 0, "Day_of_Year": 0, "Temperature": 0, "Wind_Speed": 0, "prediction": 0}]
+    prediction = random_forest_model.predict(dum_data)
+    return{"data":0}
 
 
