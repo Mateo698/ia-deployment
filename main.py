@@ -2,11 +2,13 @@ from fastapi import FastAPI
 from predrequest import PredictionRequest
 from predrequest import PredictionRequestList
 import pickle
+import typing
 import numpy as np
 import pandas as pd
 import uvicorn
 import sklearn
 import fastapi
+from fastapi import Request
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 pickle_in = open("random_forest_model.pickle","rb")
@@ -50,6 +52,8 @@ async def multiplePredict(data:PredictionRequestList):
     prediction = random_forest_model.predict(list_of_lists)
     return{'prediction':prediction.tolist()}
 
-
+@app.post('/predict_file')
+async def predict_file(request:Request):    
+    return await request.json()
 
 
