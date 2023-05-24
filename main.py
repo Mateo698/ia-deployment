@@ -56,8 +56,7 @@ async def multiplePredict(data:PredictionRequestList):
 async def predict_file(request:Request):   
     data = await request.json()
     list_of_lists = [[value for value in inner_dict.values()] for inner_dict in data['data']]
-    print(list_of_lists) 
-    
-    return{"data":0}
+    lista_transformada = [[float(obj['Clear']), float(obj['Distance'])] for obj in list_of_lists]
+    return{"data":list_of_lists}
 
 
